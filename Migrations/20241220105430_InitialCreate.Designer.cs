@@ -3,6 +3,7 @@ using System;
 using HeroCreator.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HeroCreator.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241220105430_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,38 +29,30 @@ namespace HeroCreator.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Attributes")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("attributes");
+                        .HasColumnType("text");
 
                     b.Property<string>("Class")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("class");
+                        .HasColumnType("text");
 
                     b.Property<string>("Inventory")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("inventory");
+                        .HasColumnType("text");
 
                     b.Property<int>("Level")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasDefaultValue(1)
-                        .HasColumnName("level");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("characters", (string)null);
+                    b.ToTable("Characters");
                 });
 #pragma warning restore 612, 618
         }

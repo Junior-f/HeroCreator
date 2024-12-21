@@ -168,3 +168,6 @@ C:\Users\junin\Desktop\Projetos .NET C#\HeroCreator\obj\Debug\net8.0\refint\Hero
 C:\Users\junin\Desktop\Projetos .NET C#\HeroCreator\obj\Debug\net8.0\HeroCreator.pdb
 C:\Users\junin\Desktop\Projetos .NET C#\HeroCreator\obj\Debug\net8.0\HeroCreator.genruntimeconfig.cache
 C:\Users\junin\Desktop\Projetos .NET C#\HeroCreator\obj\Debug\net8.0\ref\HeroCreator.dll
+C:\Users\junin\Desktop\Projetos .NET C#\HeroCreator\bin\Debug\net8.0\Npgsql.dll
+C:\Users\junin\Desktop\Projetos .NET C#\HeroCreator\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\junin\Desktop\Projetos .NET C#\HeroCreator\obj\Debug\net8.0\HeroCreator.sourcelink.json
