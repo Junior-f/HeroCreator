@@ -15,31 +15,30 @@ namespace HeroCreator.Data
             {
                 entity.Property(c => c.Id)
                       .HasColumnType("uuid")
-                      .HasColumnName("id"); // Nome em minúsculas.
+                      .HasColumnName("id");
 
                 entity.Property(c => c.Name)
                       .IsRequired()
-                      .HasColumnName("name"); // Nome em minúsculas.
+                      .HasColumnName("name"); 
 
                 entity.Property(c => c.Class)
                       .IsRequired()
-                      .HasColumnName("class"); // Nome em minúsculas.
+                      .HasColumnName("class"); 
 
                 entity.Property(c => c.Inventory)
                       .IsRequired()
-                      .HasColumnName("inventory"); // Nome em minúsculas.
+                      .HasColumnName("inventory");
 
                 entity.Property(c => c.Attributes)
                       .IsRequired()
-                      .HasColumnName("attributes"); // Nome em minúsculas.
+                      .HasColumnName("attributes");
 
                 entity.Property(c => c.Level)
                       .IsRequired()
-                      .HasColumnName("level") // Nome em minúsculas.
-                      .HasDefaultValue(1); // Valor padrão.
+                      .HasColumnName("level");
+                      
             });
 
-            // Se quiser, pode definir o nome da tabela em minúsculas também.
             modelBuilder.Entity<Character>().ToTable("characters");
         }
     }
