@@ -8,20 +8,14 @@ namespace HeroCreator.Repositories
     public class CharacterRepository : ICharacterRepository
     {
         private readonly AppDbContext _context;
-
-
         public CharacterRepository(AppDbContext context)
         {
             _context = context;
-
         }
-        // Buscar todos os personagens
         public async Task<List<Character>> GetAllAsync()
         {
             return await _context.Characters.ToListAsync();
         }
-
-        // Buscar personagem pelo ID
         public async Task<Character?> GetByIdAsync(Guid id)
         {
             return await _context.Characters.FindAsync(id);
@@ -32,14 +26,12 @@ namespace HeroCreator.Repositories
             await _context.SaveChangesAsync();
             return character;
         }
-
         public async Task<bool> UpdateAsync(Character character)
         {
             _context.Characters.Update(character);
             await _context.SaveChangesAsync();
             return true;
         }
-
         public async Task<bool> DeleteAsync(Guid id)
         {
             var character = await _context.Characters.FindAsync(id);
@@ -49,7 +41,5 @@ namespace HeroCreator.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
-
-
     }
 }
