@@ -5,7 +5,7 @@ namespace HeroCreator.Services
 {
     public interface ICharacterService
     {
-        Task<CreateCharacterViewModel> CreateAsync(Character character);
+        Task<CreateCharacterViewModel> CreateAsync(CreateCharacterViewModel character);
         Task<List<Character>> GetAllAsync();
         Task<Character?> GetByIdAsync(Guid id);
         Task<bool> UpdateAsync(Character character);

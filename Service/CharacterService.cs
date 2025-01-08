@@ -6,35 +6,31 @@ namespace HeroCreator.Services
 {
     public class CharacterService : ICharacterService
     {
-        private readonly ICharacterRepository _repository;
+        private readonly ICharacterRepository _characterRepository;
         private readonly ILogger<CharacterService> _logger;
 
-        public CharacterService(ICharacterRepository repository, ILogger<CharacterService> logger)
+        public CharacterService(ICharacterRepository characterRepository, ILogger<CharacterService> logger)
         {
-            _repository = repository;
+            _characterRepository = characterRepository;
             _logger = logger;
         }
-
-        // Criar novo personagem (com regras de negócio)
-        public async Task<CreateCharacterViewModel> CreateAsync(Character character)
+        public async Task<CreateCharacterViewModel> CreateAsync(CreateCharacterViewModel character)
         {
-
             try
             {
                 ValidateCharacter(character);
-                var result = await _repository.AddAsync(character);
-                _logger.LogInformation("Character created successfully: {Id}", result);
-
-                var response = new CreateCharacterViewModel
+                var response = new Character
                 {
-                    Name = result.Name,
-                    Class = result.Class,
-                    Inventory = result.Inventory,
-                    Attributes = result.Attributes,
-                    Level = result.Level
+                    Name = character.Name,
+                    Class = character.Class,
+                    Inventory = character.Inventory,
+                    Attributes = character.Attributes,
+                    Level = character.Level
 
                 };
-                return response;
+                var result = await _characterRepository.AddAsync(response);
+                _logger.LogInformation("Character created successfully: {Id}", result);
+                return character;
             }
             catch (Exception ex)
             {
@@ -42,13 +38,11 @@ namespace HeroCreator.Services
                 throw;
             }
         }
-
-        // Buscar todos os personagens
         public async Task<List<Character>> GetAllAsync()
         {
             try
             {
-                return await _repository.GetAllAsync();
+                return await _characterRepository.GetAllAsync();
             }
             catch (Exception ex)
             {
@@ -56,15 +50,13 @@ namespace HeroCreator.Services
                 throw;
             }
         }
-
-        // Buscar personagem pelo ID
         public async Task<Character?> GetByIdAsync(Guid id)
         {
             _logger.LogInformation("Fetching character by ID: {Id}", id);
 
             try
             {
-                return await _repository.GetByIdAsync(id);
+                return await _characterRepository.GetByIdAsync(id);
             }
             catch (Exception ex)
             {
@@ -72,14 +64,13 @@ namespace HeroCreator.Services
                 throw;
             }
         }
-
         public async Task<bool> UpdateAsync(Character character)
         {
             _logger.LogInformation("Updating character: {Id}", character.Id);
 
             try
             {
-                var existingCharacter = await _repository.GetByIdAsync(character.Id);
+                var existingCharacter = await _characterRepository.GetByIdAsync(character.Id);
                 if (existingCharacter == null)
                     throw new ArgumentException("Character not found.");
 
@@ -89,7 +80,7 @@ namespace HeroCreator.Services
                 existingCharacter.Attributes = character.Attributes;
                 existingCharacter.Level = character.Level;
 
-                return await _repository.UpdateAsync(existingCharacter);
+                return await _characterRepository.UpdateAsync(existingCharacter);
             }
             catch (Exception ex)
             {
@@ -97,7 +88,6 @@ namespace HeroCreator.Services
                 throw;
             }
         }
-
         public async Task<bool> DeleteAsync(Guid id)
         {
 
@@ -105,11 +95,11 @@ namespace HeroCreator.Services
 
             try
             {
-                var character = await _repository.GetByIdAsync(id);
+                var character = await _characterRepository.GetByIdAsync(id);
                 if (character == null)
                     throw new ArgumentException("Character not found.");
 
-                return await _repository.DeleteAsync(id);
+                return await _characterRepository.DeleteAsync(id);
             }
             catch (Exception ex)
             {
@@ -117,16 +107,22 @@ namespace HeroCreator.Services
                 throw;
             }
         }
-        private void ValidateCharacter(Character character)
+        private void ValidateCharacter(CreateCharacterViewModel character)
         {
             if (string.IsNullOrWhiteSpace(character.Name))
-                throw new ArgumentException("Character name is required.");
-
-            if (character.Level < 1)
-                throw new ArgumentException("Character level must be at least 1.");
+                throw new InvalidOperationException("Character name is required.");
 
             if (string.IsNullOrWhiteSpace(character.Class))
-                throw new ArgumentException("Character class is required.");
+                throw new InvalidOperationException("Character class is required.");
+
+            if (string.IsNullOrWhiteSpace(character.Inventory))
+                throw new InvalidOperationException("Character inventory is required.");
+
+            if (string.IsNullOrWhiteSpace(character.Attributes))
+                throw new InvalidOperationException("Character attributes are required.");
+
+            if (character.Level < 1)
+                throw new InvalidOperationException("Character level must be at least 1.");
         }
     }
 }
