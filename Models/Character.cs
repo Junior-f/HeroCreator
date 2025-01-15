@@ -8,13 +8,13 @@ namespace HeroCreator.Models
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
         [Required]
-        public string Name { get; set; }
+        public String? Name { get; set; }
         [Required]
-        public string Class { get; set; }
+        public String? Class { get; set; }
         [Required]
-        public string Inventory { get; set; }
+        public String? Inventory { get; set; }
         [Required]
-        public string Attributes { get; set; }
+        public String? Attributes { get; set; }
         [Required]
         [Range(1, 100, ErrorMessage = "Level must be between 1 and 100.")]
         public int Level { get; set; }

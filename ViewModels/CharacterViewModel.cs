@@ -3,12 +3,12 @@ using System;
 
 namespace HeroCreator.ViewModels
 {
-    public class CreateCharacterViewModel
+    public class CharacterViewModel
     {
-        public string Name { get; set; }
-        public string Class { get; set; }
-        public string Inventory { get; set; }
-        public string Attributes { get; set; }
+        public String? Name { get; set; }
+        public String? Class { get; set; }
+        public String? Inventory { get; set; }
+        public String? Attributes { get; set; }
         public int Level { get; set; }
     }
 }
