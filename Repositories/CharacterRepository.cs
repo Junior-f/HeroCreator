@@ -22,15 +22,15 @@ namespace HeroCreator.Repositories
         }
         public async Task<Character> AddAsync(Character character)
         {
-            _context.Characters.Add(character);
+            _context.Characters?.Add(character);
             await _context.SaveChangesAsync();
             return character;
         }
-        public async Task<bool> UpdateAsync(Character character)
+        public async Task<Character> UpdateAsync(Character character)
         {
-            _context.Characters.Update(character);
+            _context.Characters?.Update(character);
             await _context.SaveChangesAsync();
-            return true;
+            return character;
         }
         public async Task<bool> DeleteAsync(Guid id)
         {
