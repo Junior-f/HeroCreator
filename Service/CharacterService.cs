@@ -14,7 +14,7 @@ namespace HeroCreator.Services
             _characterRepository = characterRepository;
             _logger = logger;
         }
-        public async Task<CreateCharacterViewModel> CreateAsync(CreateCharacterViewModel character)
+        public async Task<CharacterViewModel> CreateAsync(CharacterViewModel character)
         {
             try
             {
@@ -29,7 +29,7 @@ namespace HeroCreator.Services
 
                 };
                 var result = await _characterRepository.AddAsync(response);
-                _logger.LogInformation("Character created successfully: {Id}", result);
+                _logger.LogInformation("Character created successfully: {Id}", result.Id);
                 return character;
             }
             catch (Exception ex)
@@ -64,35 +64,30 @@ namespace HeroCreator.Services
                 throw;
             }
         }
-        public async Task<bool> UpdateAsync(Character character)
+        public async Task<Character> UpdateAsync(Character character)
         {
-            _logger.LogInformation("Updating character: {Id}", character.Id);
-
             try
             {
-                var existingCharacter = await _characterRepository.GetByIdAsync(character.Id);
-                if (existingCharacter == null)
+                var result = await _characterRepository.GetByIdAsync(character.Id);
+                if (result == null)
                     throw new ArgumentException("Character not found.");
 
-                existingCharacter.Name = character.Name;
-                existingCharacter.Class = character.Class;
-                existingCharacter.Inventory = character.Inventory;
-                existingCharacter.Attributes = character.Attributes;
-                existingCharacter.Level = character.Level;
+                result.Name = character.Name;
+                result.Class = character.Class;
+                result.Inventory = character.Inventory;
+                result.Attributes = character.Attributes;
+                result.Level = character.Level;
 
-                return await _characterRepository.UpdateAsync(existingCharacter);
+                return await _characterRepository.UpdateAsync(result);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error updating character: {Id}", character.Id);
-                throw;
+                throw new InvalidOperationException("An error occurred while updating the character.", ex);
             }
         }
         public async Task<bool> DeleteAsync(Guid id)
         {
-
-            _logger.LogInformation("Deleting character: {Id}", id);
-
             try
             {
                 var character = await _characterRepository.GetByIdAsync(id);
@@ -107,7 +102,7 @@ namespace HeroCreator.Services
                 throw;
             }
         }
-        private void ValidateCharacter(CreateCharacterViewModel character)
+        private void ValidateCharacter(CharacterViewModel character)
         {
             if (string.IsNullOrWhiteSpace(character.Name))
                 throw new InvalidOperationException("Character name is required.");
