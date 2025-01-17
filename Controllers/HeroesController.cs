@@ -72,9 +72,9 @@ namespace HeroCreator.Controllers
 
         [HttpPost]
         [SwaggerOperation(Summary = "Create a new character", Description = "Create a new character with the provided data.")]
-        [SwaggerResponse(200, "Character created successfully", typeof(CreateCharacterViewModel))]
+        [SwaggerResponse(200, "Character created successfully", typeof(CharacterViewModel))]
         [SwaggerResponse(400, "Character data is invalid")]
-        public async Task<IActionResult> Post([FromBody] CreateCharacterViewModel newCharacter)
+        public async Task<IActionResult> Post([FromBody] CharacterViewModel newCharacter)
         {
             try
             {
@@ -105,7 +105,7 @@ namespace HeroCreator.Controllers
             {
                 character.Id = id;
                 var result = await _characterService.UpdateAsync(character);
-                if (!result)
+                if (result == null)
                     return NotFound();
                 return Ok(character);
             }
