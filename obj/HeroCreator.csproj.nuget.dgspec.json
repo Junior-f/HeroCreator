@@ -1,26 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\junin\\Desktop\\Projetos .NET C#\\HeroCreator\\HeroCreator.csproj": {}
+    "/home/francisco-junior/Meus Projetos/HeroCreator/HeroCreator.csproj": {}
   },
   "projects": {
-    "C:\\Users\\junin\\Desktop\\Projetos .NET C#\\HeroCreator\\HeroCreator.csproj": {
+    "/home/francisco-junior/Meus Projetos/HeroCreator/HeroCreator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\junin\\Desktop\\Projetos .NET C#\\HeroCreator\\HeroCreator.csproj",
+        "projectUniqueName": "/home/francisco-junior/Meus Projetos/HeroCreator/HeroCreator.csproj",
         "projectName": "HeroCreator",
-        "projectPath": "C:\\Users\\junin\\Desktop\\Projetos .NET C#\\HeroCreator\\HeroCreator.csproj",
-        "packagesPath": "C:\\Users\\junin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\junin\\Desktop\\Projetos .NET C#\\HeroCreator\\obj\\",
+        "projectPath": "/home/francisco-junior/Meus Projetos/HeroCreator/HeroCreator.csproj",
+        "packagesPath": "/home/francisco-junior/.nuget/packages/",
+        "outputPath": "/home/francisco-junior/Meus Projetos/HeroCreator/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\junin\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/francisco-junior/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.ptmdev.com.br/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
@@ -32,11 +33,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -48,6 +44,12 @@
               "version": "[8.0.6, )"
             },
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.0, )"
             },
@@ -65,9 +67,17 @@
               "target": "Package",
               "version": "[9.0.0, )"
             },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[9.0.1, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
+            },
+            "Swashbuckle.AspNetCore.Annotations": {
+              "target": "Package",
+              "version": "[7.2.0, )"
             }
           },
           "imports": [
@@ -89,7 +99,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.111/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
