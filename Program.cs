@@ -30,11 +30,15 @@ if (app.Environment.IsDevelopment())
         c.RoutePrefix = "swagger";
     });
 }
+else
+{
+    app.UseExceptionHandler("/error");
+}
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
-app.UseSwagger();
-app.UseSwaggerUI();
+
+app.MapGet("/", () => "Hello World!");
 
 app.Run();
