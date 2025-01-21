@@ -30,16 +30,13 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    app.UseExceptionHandler("/Error");
+    app.UseExceptionHandler("/error");
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
-
-app.MapGet("/", () => "Hello World!")
-   .WithName("HelloWorld");
 
 app.MapGet("/", () => "Hello World!");
 
